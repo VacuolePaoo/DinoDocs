@@ -1,20 +1,38 @@
-import { docsLlms } from '@/lib/source';
+import { isProductSlug, notesLlms, notesSource, productLlms, productSources } from '@/lib/source';
 
 export const revalidate = false;
-// other paths are 404s, never cached responses
-export const dynamicParams = false;
 
 export async function GET(_req: Request, { params }: RouteContext<'/llms.mdx/[...path]'>) {
   const { path } = await params;
-  return (await docsLlms.serve(`/${path.join('/')}`)) ?? new Response(null, { status: 404 });
+  const [system, collection, ...slug] = path.map((segment) => decodeURIComponent(segment));
+
+  if (system === 'notes') {
+    const page = notesSource.getPage(slug);
+    if (!page) return new Response(null, { status: 404 });
+    return new Response(await notesLlms.page(page), {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  }
+
+  if (system === 'docs' && collection && isProductSlug(collection)) {
+    const page = productSources[collection].getPage(slug.length > 0 ? slug : undefined);
+    if (!page) return new Response(null, { status: 404 });
+    return new Response(await productLlms[collection].page(page), {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  }
+
+  return new Response(null, { status: 404 });
 }
 
 export async function generateStaticParams() {
-  const params: { path: string[] }[] = [];
-  for (const file of await docsLlms.files()) {
-    // `/llms.txt` and `/llms-full.txt` have their own routes
-    if (!/^\/llms(-full)?\.txt$/.test(file))
-      params.push({ path: decodeURI(file).slice(1).split('/') });
+  const params = notesSource.getPages().map((page) => ({
+    path: ['notes', ...page.slugs],
+  }));
+  for (const [product, source] of Object.entries(productSources)) {
+    params.push(
+      ...source.getPages().map((page) => ({ path: ['docs', product, ...page.slugs] })),
+    );
   }
   return params;
 }

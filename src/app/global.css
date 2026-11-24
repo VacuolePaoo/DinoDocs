@@ -1,9 +1,14 @@
 @import 'tailwindcss';
+@import 'fumadocs-ui/css/generated/spacious.css';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
 html {
   scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-noto-sans-sc), sans-serif;
 }
 
 html > body[data-scroll-locked] {
