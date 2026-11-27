@@ -3,12 +3,110 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@media (hover: hover) {
+  .hover\:bg-fd-accent:hover {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    border-color: #3b82f6 !important;
+    color: #3b82f6 !important;
+  }
+  .hover\:bg-fd-accent:hover svg {
+    color: #3b82f6 !important;
+  }
+  .hover\:bg-fd-accent\/40:hover {
+    background-color: rgba(59, 130, 246, 0.16) !important;
+    border-color: rgba(59, 130, 246, 0.45) !important;
+    color: #3b82f6 !important;
+  }
+}
+
+.data-popup-open\:bg-fd-accent[data-popup-open] {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  color: #3b82f6 !important;
+}
+.data-popup-open\:text-fd-accent-foreground[data-popup-open] {
+  color: #3b82f6 !important;
+}
+.data-highlighted\:bg-fd-accent[data-highlighted] {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+:is(header, nav) button[class*='bg-fd-secondary/50']:hover,
+button[class*='bg-fd-secondary/50'][class*='p-1.5']:hover {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  border-color: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+:is(header, nav) button[class*='bg-fd-secondary/50']:hover svg,
+button[class*='bg-fd-secondary/50'][class*='p-1.5']:hover svg {
+  color: #3b82f6 !important;
+}
+:is(header, nav) [class*='hover:text-fd-foreground']:hover {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+:is(header, nav) button[class*='overflow-hidden']:hover,
+:is(header, nav) button[class*='overflow-hidden']:hover svg {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+  border-color: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+
+:root {
+  --color-fd-primary: #3b82f6;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: rgba(59, 130, 246, 0.55);
+  --color-fd-accent: rgba(59, 130, 246, 0.12);
+  --color-fd-accent-foreground: #3b82f6;
+}
+
+.dark {
+  --color-fd-primary: #3b82f6;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: rgba(59, 130, 246, 0.55);
+  --color-fd-accent: rgba(59, 130, 246, 0.12);
+  --color-fd-accent-foreground: #3b82f6;
+}
+
 html {
   scrollbar-gutter: stable;
 }
 
+html:has([data-home-page]) {
+  scrollbar-gutter: auto;
+}
+
+.scrambled-text-demo {
+  margin: 0 auto;
+  max-width: 43rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 body {
-  font-family: var(--font-noto-sans-sc), sans-serif;
+  font-family: InterVariable, "Inter Variable", Inter, sans-serif, system-ui;
 }
 
 html > body[data-scroll-locked] {

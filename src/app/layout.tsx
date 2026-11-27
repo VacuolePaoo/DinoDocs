@@ -1,11 +1,5 @@
 import { SearchProvider } from '@/components/search-provider';
 import './global.css';
-import { Noto_Sans_SC } from 'next/font/google';
-
-const notoSansSC = Noto_Sans_SC({
-  subsets: ['latin'],
-  variable: '--font-noto-sans-sc',
-});
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
@@ -14,7 +8,7 @@ export const metadata = {
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="zh-CN" className={notoSansSC.variable} suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
         <SearchProvider>{children}</SearchProvider>
       </body>
