@@ -20,7 +20,7 @@ import { buttonVariants } from '../../../components/ui/button';
 import { useTabsGroups, useTreePath } from 'fumadocs-ui/contexts/tree';
 import { isLayoutTabActive, type LayoutTab, LinkItem } from 'fumadocs-ui/layouts/shared';
 import { cn } from '../../../lib/cn';
-import { HomeButton } from '../../../components/home-button';
+import { SwitchDocsButton } from '../../../components/switch-docs-button';
 import { useSpaciousLayout } from './..';
 
 export type SidebarProviderProps = Omit<Base.SidebarProviderProps, 'collapsible'>;
@@ -76,19 +76,19 @@ export function Sidebar({ className, ...props }: SidebarProps) {
           <Base.SidebarCollapseTrigger
             className={cn(
               buttonVariants({ variant: 'ghost', size: 'icon-sm' }),
-              'size-8 text-fd-muted-foreground',
+              'size-8 text-fd-muted-foreground hover:bg-fd-primary/10 hover:text-fd-primary',
             )}
           >
             <SidebarIcon />
           </Base.SidebarCollapseTrigger>
         </div>
         <div className="flex flex-col gap-2 px-3 empty:hidden">
-          <HomeButton />
+          <SwitchDocsButton />
           <TabsMenus />
           {slots.searchTrigger && (
             <slots.searchTrigger.full
               hideIfDisabled
-              className="h-10 gap-3 rounded-xl ps-[calc(--spacing(2.5)-1px)] pe-2 [&_svg]:shrink-0"
+              className="h-10 gap-3 rounded-xl ps-[calc(--spacing(2.5)-1px)] pe-2 transition-colors hover:border-fd-primary/50 hover:bg-fd-primary/10 hover:text-fd-primary [&_svg]:shrink-0"
             />
           )}
         </div>
@@ -139,13 +139,17 @@ export function SidebarDrawer() {
           )}
           {slots.themeSwitch && <slots.themeSwitch className="p-0" />}
           <Base.SidebarTrigger
-            className={buttonVariants({ variant: 'ghost', size: 'icon-sm', className: 'p-2' })}
+            className={buttonVariants({
+              variant: 'ghost',
+              size: 'icon-sm',
+              className: 'p-2 hover:bg-fd-primary/10 hover:text-fd-primary',
+            })}
           >
             <SidebarIcon />
           </Base.SidebarTrigger>
         </div>
         <div className="flex flex-col gap-2 px-3 empty:hidden">
-          <HomeButton />
+          <SwitchDocsButton />
           <TabsMenus />
           {aiChat && (
             <button

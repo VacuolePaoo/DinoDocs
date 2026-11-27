@@ -11,9 +11,5 @@ export function baseOptions(): BaseLayoutProps {
 export function homeOptions(): BaseLayoutProps {
   return {
     ...baseOptions(),
-    links: [
-      { text: '笔记', url: '/notes', active: 'nested-url' },
-      { text: '产品文档', url: '/docs', active: 'nested-url' },
-    ],
   };
 }

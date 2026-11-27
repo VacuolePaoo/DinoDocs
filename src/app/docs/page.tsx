@@ -1,38 +1,53 @@
 import Link from 'next/link';
-import { AudioLines, ArrowUpRight, Images, PanelsTopLeft } from 'lucide-react';
+import { House } from 'lucide-react';
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
+import { DocCard } from '@/components/doc-card';
 import { homeOptions } from '@/lib/layout.shared';
-import { productCollections } from '@/lib/source';
+import { noteCollections, productCollections } from '@/lib/source';
 
-const icons = { Images, PanelsTopLeft, AudioLines };
+const docSections = [
+  {
+    heading: '产品文档',
+    icon: 'file',
+    items: productCollections.map(({ slug, title }) => ({ slug, href: `/docs/${slug}`, title })),
+  },
+  {
+    heading: '笔记',
+    icon: 'notebook',
+    items: noteCollections.map(({ slug, title }) => ({ slug, href: `/notes/${slug}`, title })),
+  },
+] as const;
 
 export default function DocsIndexPage() {
   return (
     <HomeLayout {...homeOptions()}>
       <main className="flex flex-1 justify-center px-6 py-16 md:py-24">
         <div className="w-full max-w-5xl">
-          <p className="text-sm font-medium text-fd-primary mb-3">产品文档</p>
-          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">选择你要查看的文档</h1>
-          <p className="text-fd-muted-foreground mt-4">每套产品文档拥有独立的目录、搜索和 LLMS 内容。</p>
-          <div className="grid gap-5 mt-10 md:grid-cols-3">
-            {productCollections.map(({ slug, title, description, icon }) => {
-              const Icon = icons[icon];
-              return (
-                <Link
-                  key={slug}
-                  href={`/docs/${slug}`}
-                  className="group rounded-2xl border bg-fd-card p-6 transition-colors hover:border-fd-primary/50 hover:bg-fd-accent/40"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="rounded-xl bg-fd-primary/10 p-3 text-fd-primary"><Icon className="size-6" /></div>
-                    <ArrowUpRight className="size-5 text-fd-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </div>
-                  <h2 className="text-xl font-semibold mt-8">{title}</h2>
-                  <p className="text-sm text-fd-muted-foreground mt-2 leading-6">{description}</p>
-                </Link>
-              );
-            })}
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">选择要进入的文档集</h1>
+            <Link
+              href="/"
+              className="inline-flex h-10 items-center gap-2 rounded-xl border bg-fd-secondary/50 px-4 text-sm font-medium text-fd-secondary-foreground transition-colors hover:border-fd-primary/50 hover:bg-fd-primary/10 hover:text-fd-primary"
+            >
+              <House className="size-4 shrink-0" />
+              返回首页
+            </Link>
           </div>
+
+          {docSections.map(section => (
+            <section key={section.heading} className="mt-12">
+              <h2 className="text-lg font-semibold">{section.heading}</h2>
+              <div
+                className={
+                  section.items.length > 2 ? 'grid gap-5 mt-5 md:grid-cols-3' : 'grid gap-5 mt-5 md:grid-cols-2'
+                }
+              >
+                {section.items.map(({ href, title, slug }) => (
+                  <DocCard key={href} href={href} title={title} icon={section.icon} />
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       </main>
     </HomeLayout>

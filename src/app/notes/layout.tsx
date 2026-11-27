@@ -4,7 +4,7 @@ import { notesSource } from '@/lib/source';
 import { baseOptions } from '@/lib/layout.shared';
 import { appName } from '@/lib/shared';
 import { Brand } from '@/components/brand';
-import { HomeButton } from '@/components/home-button';
+import { SwitchDocsButton } from '@/components/switch-docs-button';
 
 export default function Layout({ children }: LayoutProps<'/notes'>) {
   const { nav, ...options } = baseOptions();
@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps<'/notes'>) {
       tree={tree}
       tabs={getLayoutTabs(tree)}
       tabMode="navbar"
-      sidebar={{ banner: <HomeButton /> }}
+      sidebar={{ banner: <SwitchDocsButton /> }}
     >
       {children}
     </DocsLayout>

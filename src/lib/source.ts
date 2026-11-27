@@ -91,6 +91,16 @@ export const productCollections: {
   { slug: 'bandmusic', title: '震动音乐', description: '震动音乐产品使用说明与开发文档。', icon: 'AudioLines' },
 ];
 
+export const noteCollections: {
+  slug: string;
+  title: string;
+  description: string;
+  icon: 'CodeXml' | 'GraduationCap';
+}[] = [
+  { slug: 'dev', title: '开发笔记', description: '工程实践、踩坑记录与开发随想。', icon: 'CodeXml' },
+  { slug: 'study', title: '高中资源', description: '高中阶段整理的学习资源与资料。', icon: 'GraduationCap' },
+];
+
 export function isProductSlug(value: string): value is ProductSlug {
   return value in productSources;
 }
