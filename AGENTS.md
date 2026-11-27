@@ -30,7 +30,7 @@ No test script is currently configured.
 - `src/lib/layout.shared.tsx` and `src/lib/shared.ts` — shared navigation, site, GitHub, and Open Graph configuration.
 - `src/components/mdx.tsx` — shared MDX component overrides.
 - `src/app/notes/[collection]/llms*` and `src/app/docs/[product]/llms*` — collection-scoped LLMS endpoints; root-level aggregate LLMS URLs intentionally return 404.
-- `src/lib/og.tsx` — Takumi covers for notes and products. Windows uses Microsoft YaHei by default; other deployment environments must set `OG_FONT_PATH` and optionally `OG_FONT_BOLD_PATH` to local Chinese font files.
+- `src/lib/og.tsx` — next/og covers for notes and products with the official Next.js example styling; `src/lib/og-fonts.ts` fetches Noto Sans SC TTFs from Google Fonts at build time and caches them under `node_modules/.cache/og-fonts/` (satori only supports ttf/otf/woff, fonts are never committed, and the build environment must reach `fonts.googleapis.com`/`fonts.gstatic.com`). OG routes are fully static (`dynamicParams = false`) and serve `image.png`.
 - `src/app/global.css` — Tailwind CSS 4 and Fumadocs theme imports.
 
 ## Conventions

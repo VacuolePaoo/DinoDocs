@@ -56,9 +56,6 @@ importers:
       scroll-into-view-if-needed:
         specifier: ^3.2.1
         version: 3.2.1
-      takumi-js:
-        specifier: ^2.20.0
-        version: 2.22.1(csstype@3.2.4)(react@19.3.1)
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.3.5
@@ -4038,10 +4035,12 @@ snapshots:
     transitivePeerDependencies:
       - preact
       - react
+    optional: true
 
   '@takumi-rs/helpers@2.22.1(react@19.3.1)':
     optionalDependencies:
       react: 19.3.1
+    optional: true
 
   '@takumi-rs/wasm@2.22.1(csstype@3.2.4)(react@19.3.1)':
     dependencies:
@@ -4051,6 +4050,7 @@ snapshots:
     transitivePeerDependencies:
       - preact
       - react
+    optional: true
 
   '@types/debug@4.1.13':
     dependencies:
@@ -6708,6 +6708,7 @@ snapshots:
       - csstype
       - preact
       - react
+    optional: true
 
   tapable@2.3.4: {}
 
