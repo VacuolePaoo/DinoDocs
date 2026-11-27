@@ -9,7 +9,7 @@ import {
 } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Aurora from "@/components/aurora";
 import BlurText from "@/components/blur-text";
@@ -343,8 +343,8 @@ export default function HomeClient({
             onClick={scrollToTop}
             className="inline-flex items-center gap-1.5 text-sm text-white/50 transition-colors hover:text-fd-primary"
           >
-            回到顶部
-            <ArrowUpRight className="size-3.5" />
+            Back to top
+            <ArrowUp className="size-4" />
           </button>
         </div>
 
@@ -356,7 +356,7 @@ export default function HomeClient({
           />
           <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-3">
             <div>
-              <p className="text-sm font-medium text-white">产品文档</p>
+              <p className="text-sm font-medium text-white">Products</p>
               <ul className="mt-3 space-y-2 text-sm">
                 {productEntries.map((item) => (
                   <li key={item.href}>
@@ -371,7 +371,7 @@ export default function HomeClient({
               </ul>
             </div>
             <div>
-              <p className="text-sm font-medium text-white">笔记</p>
+              <p className="text-sm font-medium text-white">Notes</p>
               <ul className="mt-3 space-y-2 text-sm">
                 {noteEntries.map((item) => (
                   <li key={item.href}>
@@ -386,34 +386,33 @@ export default function HomeClient({
               </ul>
             </div>
             <div>
-              <p className="text-sm font-medium text-white">关于</p>
+              <p className="text-sm font-medium text-white">About</p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li>
                   <Link
                     href="/docs"
                     className="text-white/50 transition-colors hover:text-fd-primary"
                   >
-                    切换文档
+                    Switch Docs
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="mt-16 space-y-1.5 text-xs text-white/40">
-            <p>版权所有 © {copyrightYear} CNCEB Studio</p>
+          <div className="mt-16 space-y-1.5 text-sm font-medium text-white/40">
+            <p>© {copyrightYear} CNCEB Studio. All rights reserved.</p>
             <p>
-              文档内容遵循{" "}
+              Content licensed under{" "}
               <a
-                href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
                 target="_blank"
                 rel="noreferrer"
                 className="underline underline-offset-2 transition-colors hover:text-fd-primary"
               >
                 CC BY-NC-SA 4.0
-              </a>{" "}
-              协议共享
+              </a>
             </p>
-            <p>构建于 {builtAt}</p>
+            <p>Built at {builtAt}</p>
           </div>
         </div>
 
